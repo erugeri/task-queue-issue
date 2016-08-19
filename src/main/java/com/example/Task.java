@@ -22,28 +22,11 @@ public class Task extends HttpServlet {
 		long start = System.currentTimeMillis();
 		log.info("Start Task - "+taskName);
 		
-		try { // sleep between 10s and 3 min 15s
+		try { // sleep up to 3 min 15s
 			Thread.sleep((int) Math.pow(new Random().nextInt(56), 3)); // pow to have bigger variation
 		} catch (InterruptedException e) {}
 		
 		log.info("End Task - "+taskName+" - duration="+(System.currentTimeMillis()-start)+"ms");
-		
-		resp.setStatus(200);
-	}
-	
-	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
-		String taskName = req.getHeader("X-AppEngine-TaskName");
-		
-		long start = System.currentTimeMillis();
-		log.info("Start POST Task - "+taskName);
-		
-		try { // sleep between 10s and 3 min
-			Thread.sleep(10_000 + new Random().nextInt(170_000));
-		} catch (InterruptedException e) {}
-		
-		log.info("End POST Task - "+taskName+" - duration="+(System.currentTimeMillis()-start)+"ms");
 		
 		resp.setStatus(200);
 	}
